@@ -69,7 +69,10 @@ public class ServerLauncher : MonoBehaviour
             UseShellExecute = false,
             RedirectStandardOutput = true,
             RedirectStandardError = true,
-            CreateNoWindow = true // ñ{î‘ÇÕtrueêÑèß
+            CreateNoWindow = false, // ñ{î‘ÇÕtrueêÑèß
+
+            StandardOutputEncoding = System.Text.Encoding.UTF8,
+            StandardErrorEncoding = System.Text.Encoding.UTF8
         };
 
         try

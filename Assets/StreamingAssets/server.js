@@ -25,7 +25,7 @@ wss.on('connection', function connection(ws) {
             const myId = data.id || "unknown";
             ws.myId = myId; // ソケット自体にIDをメモしておく
             clients[myId] = ws; 
-            console.log(`✅ 登録完了: ${myId}`);
+            console.log(`登録完了: ${myId}`);
             
             // もしPC(host)への通知なら、転送してあげる
             if (clients["host"] && clients["host"].readyState === WebSocket.OPEN) {
@@ -42,12 +42,12 @@ wss.on('connection', function connection(ws) {
             const targetWs = clients[data.target];
             
             if (targetWs.readyState === WebSocket.OPEN) {
-                // ★重要: 「誰から来たか (from)」を付与して転送！
+                // 重要: 「誰から来たか (from)」を付与して転送！
                 // これでPC側が "from": "P1" を見て判断できるようになる
                 data.from = ws.myId; 
                 
                 targetWs.send(JSON.stringify(data));
-                console.log(`📩 転送: ${ws.myId} -> ${data.target} (${data.type})`);
+                console.log(`転送: ${ws.myId} -> ${data.target} (${data.type})`);
             }
         } 
         // 宛先不明の場合 (PCへの返信とみなす簡易処理)
@@ -59,7 +59,7 @@ wss.on('connection', function connection(ws) {
 
     ws.on('close', () => {
         if (ws.myId) {
-            console.log(`❌ 切断: ${ws.myId}`);
+            console.log(`切断: ${ws.myId}`);
             delete clients[ws.myId];
         }
     });
