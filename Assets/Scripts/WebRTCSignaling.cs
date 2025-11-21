@@ -22,7 +22,11 @@ public class WebRTCSignaling : MonoBehaviour
     {
         websocket = new WebSocket(serverUrl);
 
-        websocket.OnOpen += () => Debug.Log("WS Connected!");
+        websocket.OnOpen += () =>
+        {
+            Send(new SignalingMessage { type = "login_notify", id = "host" });
+            Debug.Log("サーバーに Host としてログインしました");
+        };
         websocket.OnError += (e) => Debug.LogError("WS Error: " + e);
         websocket.OnClose += (e) => Debug.Log("WS Closed");
 

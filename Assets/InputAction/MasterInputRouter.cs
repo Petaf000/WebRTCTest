@@ -114,7 +114,11 @@ public class MasterInputRouter : MonoBehaviour
 
     IEnumerator LoginAsHost()
     {
+        // WebSocket接続が確立するまで待機
+        // (WebRTCSignaling.csでOnOpenイベントを使っている場合はそちらに処理を移す方がクリーンです)
         yield return new WaitForSeconds(1.0f);
+
+        // サーバーに Host としてログイン
         signaling.Send(new SignalingMessage { type = "login_notify", id = "host" });
         Debug.Log("サーバーに Host としてログインしました");
     }

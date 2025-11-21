@@ -44,7 +44,7 @@ public class TabletController : MonoBehaviour
         {
             Debug.Log("★ ボタン押下。ログイン通知送信: " + (myPlayerId == 0 ? "P1" : "P2"));
             signaling.Send(new SignalingMessage { type = "login_notify", id = (myPlayerId == 0 ? "P1" : "P2") });
-            connectButton.gameObject.SetActive(false);
+            //connectButton.gameObject.SetActive(false);
         });
 
 
